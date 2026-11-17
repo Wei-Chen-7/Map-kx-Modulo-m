@@ -43,6 +43,7 @@ pytest -q                        # all statements and examples (about 40 s)
 python scripts/make_numbers.py   # generated/numbers.tex, generated/table_drift.tex (about 1 min)
 python scripts/make_figures.py   # figures/fig_xp_*.pdf
 python scripts/check_tex.py paper.tex   # labels, citations, hand-typed numbers
+python scripts/sync_paper.py paper_dir  # copy the numbers and figures into the paper, print what changed
 ```
 
 ## Layout
@@ -54,7 +55,7 @@ python scripts/check_tex.py paper.tex   # labels, citations, hand-typed numbers
 | `src/kxn/powermap.py` | `k x^n mod m`: strata, absorption, in-degrees, fixed points, cycle lengths |
 | `src/kxn/stats.py` | exact distribution of `log L_p / log p`, KS distance, label-permutation test |
 | `tests/` | one test per statement of the paper |
-| `scripts/` | numbers, figures, LaTeX checker |
+| `scripts/` | numbers, figures, LaTeX checker, sync into the paper |
 | `generated/`, `figures/` | outputs that the paper includes |
 
 ## Which test checks which statement
