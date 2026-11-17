@@ -2,6 +2,8 @@
 
 Code for the paper *The Functional Digraph of the Map x -> k x^n Modulo m* (Wei Chen).
 
+Repository: https://github.com/Wei-Chen-7/Map-kx-Modulo-m
+
 It does three jobs:
 
 1. **Checks the theorems.** Every numbered statement and every worked example of the paper is tested against direct iteration of the map.

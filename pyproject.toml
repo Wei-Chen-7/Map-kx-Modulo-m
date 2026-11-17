@@ -12,6 +12,9 @@ license = { text = "MIT" }
 authors = [{ name = "Wei Chen" }]
 dependencies = ["sympy>=1.12", "numpy>=1.26"]
 
+[project.urls]
+Repository = "https://github.com/Wei-Chen-7/Map-kx-Modulo-m"
+
 [project.optional-dependencies]
 dev = ["pytest>=8", "matplotlib>=3.8"]
 
