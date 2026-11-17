@@ -105,3 +105,51 @@ def test_involutions(m):
             )
             pred = 2**om if a2 in (0, 2) else (2 ** (om - 1) if a2 == 1 else 2 ** (om + 1))
             assert nfix == (pred if ok else 0)
+
+
+def _rho(N, p, a):
+    from kxn.powermap import nth_roots_of_unity
+
+    return nth_roots_of_unity(N, p, a)
+
+
+@pytest.mark.parametrize("m", [8, 16, 32, 64, 9, 27, 25, 45, 63, 72, 80, 96, 105, 120, 136])
+def test_unit_tree_level_sizes(m):
+    # Corollary (units of an arbitrary modulus): rho_s - rho_{s-1} vertices at depth s
+    for n in range(1, 9):
+        for k in [x for x in range(m) if gcd(x, m) == 1][:6]:
+            pm = PowerMap(k, n, m)
+            G = pm.unit_graph()
+            r = next(iter(G.recurrent))
+            prof = G.level_profile(r)
+            height = max(prof) if prof else 0
+            for s in range(1, height + 2):
+                rho_s = 1
+                rho_prev = 1
+                for p, a in pm.factors.items():
+                    rho_s *= _rho(n**s, p, a)
+                    rho_prev *= _rho(n ** (s - 1), p, a)
+                assert prof.get(s, 0) == rho_s - rho_prev
+
+
+@pytest.mark.parametrize("m", [12, 36, 45, 60, 63, 75, 90, 100, 108, 126, 150])
+def test_global_structure_recurrent_vertices(m):
+    # Theorem (global structure), part (i): x is recurrent iff every coordinate is 0 or a recurrent unit
+    for n in range(2, 6):
+        for k in range(1, m):
+            pm = PowerMap(k, n, m)
+            G = pm.graph()
+            local = {}
+            for p, a in pm.factors.items():
+                N = p**a
+                loc = PowerMap(k % N if k % N else N, n, N).graph() if k % N else None
+                local[p] = (N, loc)
+            for x in range(m):
+                pred = True
+                for p, (N, loc) in local.items():
+                    xp = x % N
+                    if xp == 0:
+                        continue
+                    if loc is None or k % p == 0 or xp % p == 0 or xp not in loc.recurrent:
+                        pred = False
+                assert (x in G.recurrent) == pred

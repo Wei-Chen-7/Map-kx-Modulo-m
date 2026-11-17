@@ -62,6 +62,8 @@ python scripts/check_tex.py paper.tex   # labels, citations, hand-typed numbers
 | Stratum dynamics, unit stratum, singular fixed points, absorption depth | `test_powermap.py::test_prime_power_statements` |
 | In-degrees on the strata, fixed points on all of `Z/m` | `test_powermap.py::test_prime_power_statements`, `::test_composite_moduli` |
 | Scaling lemma, trees on the unit group of any `m` | `test_powermap.py::test_scaling_conjugacy_and_unit_trees` |
+| Level sizes of the unit trees for any `m` | `test_powermap.py::test_unit_tree_level_sizes` |
+| Recurrent vertices for composite `m` | `test_powermap.py::test_global_structure_recurrent_vertices` |
 | Local cycle lengths, fixed-point-free corollary | `test_affine.py::test_local_cycle_lengths_and_fixed_point_free_corollary` |
 | Fixed points, in-degrees, reduction, cycle multiset, tree isomorphism, level profile | `test_affine.py::test_everything_on_general_modulus` |
 | Involutions | `test_powermap.py::test_involutions` |
